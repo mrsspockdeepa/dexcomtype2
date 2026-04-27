@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -555,9 +554,9 @@
 
   <div class="kicker reveal">Dexcom · Principal PM, Discovery</div>
 
-  <h1 class="title reveal">Why do they leave at month twelve <em>— and what would bring them back?</em></h1>
+  <h1 class="title reveal">Type 2 Patient <em>Discovery</em></h1>
 
-  <p class="deck reveal">A discovery framework for understanding Type 2 diabetes patient needs and rebuilding the Stelo experience around the moment retention falls off a cliff.</p>
+  <p class="deck reveal">A continuous-discovery framework for Stelo. From stress-testing the M12 hypothesis on day one, to mapping the full Type 2 patient journey from diagnosis through drop-off, to the platform requirements that would likely emerge from the work.</p>
 
   <div class="byline">
     <div class="byline-cell">
@@ -596,12 +595,128 @@
     </div>
     <div class="stat">
       <div class="figure">~M12</div>
-      <div class="desc">The retention cliff this case study targets — the moment the product stops growing with the user.</div>
+      <div class="desc">The retention cliff <em>in CGM behavior-change literature.</em> Stelo's actual cohort curve is a working hypothesis I'd verify on day one (Section 03).</div>
     </div>
   </div>
 
-  <!-- SECTION 2: PROBLEM FRAMING -->
-  <h2><span class="num">02 — Problem Framing</span>What we don't yet know about the people who leave</h2>
+  <!-- SECTION 2: STRATEGIC CONTEXT -->
+  <h2><span class="num">02 — Strategic Context</span>Four forces shaping what Stelo retention work can be — and what it can't</h2>
+
+  <p>Before any discovery program, I'd want to be explicit about the strategic ground we're standing on. Stelo's retention problem isn't a generic SaaS retention problem. It's shaped by four forces a Principal PM has to internalize before designing the work.</p>
+
+  <div class="methods">
+    <div class="method">
+      <div class="tag">Force · Competitive</div>
+      <h3>The OTC CGM category is filling fast</h3>
+      <ul>
+        <li>Abbott Lingo (also OTC, cash-pay), Levels, January AI, NutriSense — all targeting the same non-insulin and prediabetic users.</li>
+        <li>"Retention" in this category isn't just about staying — it's about not switching. A churned Stelo user may be wearing a competitor's sensor next month.</li>
+        <li>Discovery must distinguish "lost to disengagement" from "lost to switching" — they have completely different fixes.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Force · Pharmacological</div>
+      <h3>GLP-1s are reshaping the user base</h3>
+      <ul>
+        <li>Ozempic, Mounjaro, Zepbound adoption among non-insulin T2D is significant and growing.</li>
+        <li>Two scenarios for CGM value: GLP-1 obviates it (smoother curves, less interesting data), or GLP-1 creates a new co-management use case (medication efficacy, titration support).</li>
+        <li>Discovery must determine which scenario dominates for which segments — the answer reshapes the roadmap.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Force · Channel &amp; Model</div>
+      <h3>OTC, cash-pay is a different retention game</h3>
+      <ul>
+        <li>$89/month cash-pay subscription. No insurance friction reducing churn — and no insurance coverage cushioning it either.</li>
+        <li>HSA/FSA eligibility, employer wellness program distribution, and retail pharmacy reorder all influence retention beyond the app.</li>
+        <li>Acquisition channel almost certainly correlates with retention — direct.com user behaves differently than employer-program user.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Force · Regulatory</div>
+      <h3>SaMD constraints shape what discovery can do</h3>
+      <ul>
+        <li>Stelo is FDA-cleared as a Class II Software-as-Medical-Device. This is not consumer SaaS.</li>
+        <li>IRB protocols govern user research touching device behavior. 510(k) implications constrain material UI changes affecting clinical interpretation.</li>
+        <li>Adverse event reporting (MDR), FDA cybersecurity guidance, and labeling rules all shape the experimentation framework. Methodology must operate within these — not around them.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: WHAT I'D VERIFY FIRST -->
+  <h2><span class="num">03 — What I'd Verify First</span>The M12 cliff is my working hypothesis — here's how I'd test it on day one</h2>
+
+  <p>I want to be honest about what I know and what I'm assuming. The "M12 cliff" framing in this case study comes from CGM behavior-change literature on adherence patterns — not from published Stelo cohort data. Stelo has only been live since mid-2024, so the M12 picture is still forming. The first week of this role isn't running new discovery. It's understanding what Dexcom already knows.</p>
+
+  <h4>What Dexcom likely already has</h4>
+  <p>Dexcom has 25+ years of CGM adherence research across G6, G7, and now Stelo. Internal UX research, clinical literature, claims data analyses, and market research likely already address many of the questions this case study raises. Doing new discovery without first inventorying that body of knowledge would be wasteful and arrogant. The right move is to figure out what's already known, what translates from prescription CGM to OTC Stelo, and what genuinely is a Stelo-specific gap that warrants new research.</p>
+
+  <h4>The day-one data questions</h4>
+  <p>Before the first new interview, here's what I'd want answered from internal data and existing research:</p>
+
+  <div class="req-block">
+    <div class="req-id">Q1 · Actual Curve Shape</div>
+    <h3>What does Stelo's real retention curve look like by month, by cohort?</h3>
+    <ul>
+      <li>Where exactly does drop-off concentrate — M12, M3, or several inflection points?</li>
+      <li>Is it one cohort behavior or several archetypes overlaid?</li>
+      <li>How does it compare to G6/G7 adherence curves at equivalent tenure?</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q2 · Existing Research Inventory</div>
+    <h3>What internal research already addresses these patterns?</h3>
+    <ul>
+      <li>Prior UXR studies on long-tenure CGM adherence — what's been learned, what translates to OTC, what doesn't.</li>
+      <li>Clinical affairs studies on non-insulin T2D outcomes with CGM.</li>
+      <li>Customer support patterns, NPS by tenure, and return reasons captured at the warehouse.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q3 · Stelo ↔ G7 Transitions</div>
+    <h3>Is some "churn" actually graduation to prescription?</h3>
+    <ul>
+      <li>What percentage of Stelo "churners" later show up as G7 users?</li>
+      <li>What percentage have a clinical event (TIR worsening, insulin start, A1c rise) coinciding with subscription end?</li>
+      <li>Reframing graduation as funnel success rather than churn changes the entire metric architecture.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q4 · GLP-1 Overlap</div>
+    <h3>How does the GLP-1 user behave differently?</h3>
+    <ul>
+      <li>What percentage of the Stelo base is on a GLP-1, and how is that growing?</li>
+      <li>Do GLP-1 users churn more, less, or differently?</li>
+      <li>Is there a GLP-1 onset → CGM disengagement signal in the data?</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q5 · Channel Mix</div>
+    <h3>Does retention vary by acquisition channel?</h3>
+    <ul>
+      <li>Direct.com vs retail pharmacy vs employer wellness — what's the channel mix and how does it segment retention?</li>
+      <li>Pharmacy reorder behavior is a meaningful retention input that app analytics alone can't see.</li>
+      <li>Channel may turn out to be a stronger predictor than demographics.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q6 · Literature Benchmark</div>
+    <h3>How does Stelo compare to published non-insulin T2D CGM adherence?</h3>
+    <ul>
+      <li>ABCD CGM consensus, ADA Standards of Care updates, and recent JDST publications all bear on what "normal" adherence looks like.</li>
+      <li>If Stelo is outperforming the literature, the problem is different than if it's underperforming.</li>
+    </ul>
+  </div>
+
+  <p>If the answers confirm the M12 hypothesis, the rest of this case study runs as written. If they don't — if drop-off concentrates at M3, or "churn" is mostly G7 graduation, or GLP-1 explains most of the cliff — the entire roadmap reshapes. <strong>Discovery's first job is to find out which world we're in.</strong></p>
+
+  <!-- SECTION 4: PROBLEM FRAMING -->
+  <h2><span class="num">04 — Problem Framing</span>What we don't yet know about the people who leave</h2>
 
   <p>Before designing anything, I'd want to draw a clean line between the things we already know and the things we're guessing at. Discovery is most valuable when it eliminates internal pattern-matching disguised as insight.</p>
 
@@ -613,10 +728,133 @@
 
   <p class="pull">"They don't leave because the product broke. They leave because the product didn't grow up with them."<cite>— A working hypothesis worth testing</cite></p>
 
-  <!-- SECTION 3: HYPOTHESES -->
-  <h2><span class="num">03 — Working Hypotheses</span>Six explanations for the retention cliff — each testable, each with a different fix</h2>
+  <!-- SECTION 5: THE FULL ARC / JOURNEY -->
+  <h2><span class="num">05 — The Full Arc</span>Studying the Type 2 user journey from diagnosis through drop-off, not just the in-product months</h2>
 
-  <p>I'd enter discovery with a hypothesis tree, not a single theory. Each hypothesis points to a different intervention, so distinguishing among them isn't academic — it determines what we build first.</p>
+  <p>The M12 cliff doesn't exist in isolation. By the time someone reaches month 12 of Stelo, they've often been navigating Type 2 diabetes for five, ten, fifteen years — a diagnosis that has already shaped their relationship with food, their body, their healthcare system, and their identity long before they ever saw a Stelo ad. Any retention strategy that ignores that upstream context will be solving the wrong problem.</p>
+
+  <p>So the first thing I'd do — alongside starting the weekly interview cadence — is build a shared, living understanding of the full Type 2 user journey, from the moment of diagnosis through the moment of drop-off. The team needs the same mental model of where the user has been, not just where the user is in the product.</p>
+
+  <div class="curve-card">
+    <div class="curve-title">User Journey · From Diagnosis to Drop-Off</div>
+    <svg class="curve-svg" viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" aria-label="Eight-phase user journey arc spanning Pre-Stelo (Diagnosis, Coping, Plateau, Discovering) and Stelo (Onboarding, Learning, Maintaining, Deciding) phases, with a key research question under each phase">
+      <!-- Section labels -->
+      <text x="194" y="18" font-family="DM Mono, monospace" font-size="10" fill="#7a7e85" text-anchor="middle" letter-spacing="2">PRE-STELO</text>
+      <text x="566" y="18" font-family="DM Mono, monospace" font-size="10" fill="#d96846" text-anchor="middle" letter-spacing="2">STELO</text>
+      <line x1="12" y1="28" x2="376" y2="28" stroke="#7a7e85" stroke-width="1"/>
+      <line x1="384" y1="28" x2="748" y2="28" stroke="#d96846" stroke-width="2"/>
+
+      <!-- Vertical divider -->
+      <line x1="380" y1="8" x2="380" y2="200" stroke="#1c2024" stroke-width="1" stroke-dasharray="3 3"/>
+
+      <!-- Pre-Stelo phase boxes -->
+      <g>
+        <rect x="12" y="44" width="88" height="62" fill="#fdf8f0" stroke="#7a7e85" stroke-width="1.2" rx="2"/>
+        <text x="56" y="66" font-family="DM Mono, monospace" font-size="8" fill="#7a7e85" text-anchor="middle" letter-spacing="1.3">PHASE 01</text>
+        <text x="56" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Diagnosis</text>
+
+        <rect x="104" y="44" width="88" height="62" fill="#fdf8f0" stroke="#7a7e85" stroke-width="1.2" rx="2"/>
+        <text x="148" y="66" font-family="DM Mono, monospace" font-size="8" fill="#7a7e85" text-anchor="middle" letter-spacing="1.3">PHASE 02</text>
+        <text x="148" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Coping</text>
+
+        <rect x="196" y="44" width="88" height="62" fill="#fdf8f0" stroke="#7a7e85" stroke-width="1.2" rx="2"/>
+        <text x="240" y="66" font-family="DM Mono, monospace" font-size="8" fill="#7a7e85" text-anchor="middle" letter-spacing="1.3">PHASE 03</text>
+        <text x="240" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Plateau</text>
+
+        <rect x="288" y="44" width="88" height="62" fill="#fdf8f0" stroke="#7a7e85" stroke-width="1.2" rx="2"/>
+        <text x="332" y="66" font-family="DM Mono, monospace" font-size="8" fill="#7a7e85" text-anchor="middle" letter-spacing="1.3">PHASE 04</text>
+        <text x="332" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Discovering</text>
+      </g>
+
+      <!-- Stelo phase boxes -->
+      <g>
+        <rect x="384" y="44" width="88" height="62" fill="#f4a78c" fill-opacity="0.28" stroke="#d96846" stroke-width="1.2" rx="2"/>
+        <text x="428" y="66" font-family="DM Mono, monospace" font-size="8" fill="#d96846" text-anchor="middle" letter-spacing="1.3">PHASE 05</text>
+        <text x="428" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Onboarding</text>
+
+        <rect x="476" y="44" width="88" height="62" fill="#f4a78c" fill-opacity="0.28" stroke="#d96846" stroke-width="1.2" rx="2"/>
+        <text x="520" y="66" font-family="DM Mono, monospace" font-size="8" fill="#d96846" text-anchor="middle" letter-spacing="1.3">PHASE 06</text>
+        <text x="520" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Learning</text>
+
+        <rect x="568" y="44" width="88" height="62" fill="#f4a78c" fill-opacity="0.28" stroke="#d96846" stroke-width="1.2" rx="2"/>
+        <text x="612" y="66" font-family="DM Mono, monospace" font-size="8" fill="#d96846" text-anchor="middle" letter-spacing="1.3">PHASE 07</text>
+        <text x="612" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#1c2024" font-weight="600" text-anchor="middle">Maintaining</text>
+
+        <rect x="660" y="44" width="88" height="62" fill="#d96846" stroke="#d96846" stroke-width="1.2" rx="2"/>
+        <text x="704" y="66" font-family="DM Mono, monospace" font-size="8" fill="#fff8ec" text-anchor="middle" letter-spacing="1.3">PHASE 08</text>
+        <text x="704" y="86" font-family="DM Sans, sans-serif" font-size="12" fill="#fff8ec" font-weight="600" text-anchor="middle">Deciding</text>
+      </g>
+
+      <!-- Arrow chevrons between boxes -->
+      <g fill="#7a7e85">
+        <polygon points="100,75 102,71 102,79"/>
+        <polygon points="192,75 194,71 194,79"/>
+        <polygon points="284,75 286,71 286,79"/>
+      </g>
+      <g fill="#d96846">
+        <polygon points="472,75 474,71 474,79"/>
+        <polygon points="564,75 566,71 566,79"/>
+        <polygon points="656,75 658,71 658,79"/>
+      </g>
+
+      <!-- Research questions under each phase -->
+      <g font-family="DM Sans, sans-serif" font-size="9.5" fill="#4a4f57" font-style="italic">
+        <text x="56" y="124" text-anchor="middle">"What did they</text>
+        <text x="56" y="137" text-anchor="middle">hear vs. what</text>
+        <text x="56" y="150" text-anchor="middle">actually stuck?"</text>
+
+        <text x="148" y="124" text-anchor="middle">"What did they</text>
+        <text x="148" y="137" text-anchor="middle">try and</text>
+        <text x="148" y="150" text-anchor="middle">abandon?"</text>
+
+        <text x="240" y="124" text-anchor="middle">"What triggered</text>
+        <text x="240" y="137" text-anchor="middle">them to seek</text>
+        <text x="240" y="150" text-anchor="middle">a CGM?"</text>
+
+        <text x="332" y="124" text-anchor="middle">"Walk me through</text>
+        <text x="332" y="137" text-anchor="middle">the day you</text>
+        <text x="332" y="150" text-anchor="middle">bought it."</text>
+
+        <text x="428" y="124" text-anchor="middle">"Walk me through</text>
+        <text x="428" y="137" text-anchor="middle">your first</text>
+        <text x="428" y="150" text-anchor="middle">week of wear."</text>
+
+        <text x="520" y="124" text-anchor="middle">"Which insights</text>
+        <text x="520" y="137" text-anchor="middle">actually shifted</text>
+        <text x="520" y="150" text-anchor="middle">behavior?"</text>
+
+        <text x="612" y="124" text-anchor="middle">"When did the</text>
+        <text x="612" y="137" text-anchor="middle">data start</text>
+        <text x="612" y="150" text-anchor="middle">feeling like noise?"</text>
+
+        <text x="704" y="124" text-anchor="middle">"Walk me through</text>
+        <text x="704" y="137" text-anchor="middle">the day you</text>
+        <text x="704" y="150" text-anchor="middle">stopped reordering."</text>
+      </g>
+
+      <!-- Time scale -->
+      <g font-family="DM Mono, monospace" font-size="9" fill="#7a7e85" letter-spacing="1">
+        <text x="194" y="184" text-anchor="middle">YEARS BEFORE STELO · OFTEN 5–15</text>
+        <text x="566" y="184" text-anchor="middle">MONTHS WITHIN STELO · 0–18+</text>
+      </g>
+
+      <!-- Bottom principle callout -->
+      <rect x="12" y="208" width="736" height="100" fill="#fff8ec" stroke="#1c2024" stroke-width="1" rx="2"/>
+      <text x="32" y="234" font-family="DM Mono, monospace" font-size="10" fill="#d96846" letter-spacing="1.5">RESEARCH PRINCIPLE</text>
+      <text x="32" y="260" font-family="DM Sans, sans-serif" font-size="14" fill="#1c2024">By the time we're optimizing the month-12 experience, we're already late.</text>
+      <text x="32" y="280" font-family="DM Sans, sans-serif" font-size="14" fill="#4a4f57">Many drop-off causes are seeded years earlier — at diagnosis, through years of self-management,</text>
+      <text x="32" y="298" font-family="DM Sans, sans-serif" font-size="14" fill="#4a4f57">or in the very first onboarding moments where expectations were set.</text>
+    </svg>
+  </div>
+
+  <p>The arc reframes what we're studying. Instead of asking "what makes users churn at M12," we ask: <strong>which moments in this eight-phase journey were silently shaping the M12 decision all along?</strong> The user who churns at month 12 may have been set up to churn at onboarding, when the product overpromised. Or at diagnosis, when their relationship with self-quantification was first formed. Or in the coping years, when they learned to disengage from health tracking as a defense against fatigue.</p>
+
+  <p>Practically, this shapes the discovery work in three ways. First, our weekly interviews deliberately span every phase — including people who never bought Stelo, people who returned it within 30 days, and people newly diagnosed who haven't yet considered a CGM. Second, when we map opportunities in the Opportunity Solution Tree, we tag where in the arc they originate, which often points toward upstream interventions — onboarding repair, diagnosis-stage education partnerships, provider co-management — rather than another M12 feature. Third, the journey map itself becomes a living team artifact, updated as we learn, and the shared language for "where are we focused this quarter."</p>
+
+  <!-- SECTION 4: HYPOTHESES -->
+  <h2><span class="num">06 — Working Hypotheses</span>Seven explanations for the retention cliff — each Dexcom-specific, each pointing to a different fix</h2>
+
+  <p>I'd enter discovery with a hypothesis tree, not a single theory. Each hypothesis points to a different intervention, so distinguishing among them isn't academic — it determines what we build first. These aren't fixed; they get pruned, replaced, and added to every week as we hear from customers. They're also deliberately Stelo-shaped — the OTC, cash-pay, non-insulin context produces churn dynamics that generic SaaS retention frameworks miss.</p>
 
   <div class="hypotheses">
     <div class="hyp">
@@ -630,102 +868,121 @@
       <div class="hyp-id">H2</div>
       <div>
         <h3>Behavior-change success paradox</h3>
-        <p>Users who actually changed their habits feel they "graduated." Their A1c improved, their PCP took them off concern, and continuing to wear a sensor feels redundant — even though stopping is exactly when relapse risk peaks.</p>
+        <p>Users who actually changed their habits feel they "graduated." TIR improved, their PCP took them off concern, and continuing to wear a sensor feels redundant — even though stopping is exactly when relapse risk peaks.</p>
       </div>
     </div>
     <div class="hyp">
       <div class="hyp-id">H3</div>
       <div>
-        <h3>Lifestyle context shift</h3>
-        <p>A new medication (e.g., GLP-1 initiation), a job change, a caregiving role, or a financial squeeze pushes the sensor down the priority list. The drop-off is environmental, not motivational.</p>
+        <h3>GLP-1 obviation</h3>
+        <p>User starts a GLP-1. Glucose curves flatten. The data that taught them about food now mostly confirms the medication is working. $89/month for "the medication is still working" doesn't justify itself.</p>
       </div>
     </div>
     <div class="hyp">
       <div class="hyp-id">H4</div>
       <div>
-        <h3>Loneliness of the loop</h3>
-        <p>The user has rich data but no one to interpret it with. Their PCP doesn't ask about it. Their family doesn't engage. The feedback loop stays solitary and eventually feels pointless.</p>
+        <h3>Graduation to prescription G7</h3>
+        <p>Some "churners" aren't lost users — they've moved to prescription Dexcom G7 because their condition progressed, insulin was added, or insurance now covers it. The journey continues; our reporting shows it as loss when it's actually funnel success.</p>
       </div>
     </div>
     <div class="hyp">
       <div class="hyp-id">H5</div>
       <div>
-        <h3>Friction compounding</h3>
-        <p>Small annoyances — sensor failures, adhesive issues, app sync errors, billing confusion — accumulate quietly. None alone causes churn, but the cumulative weight tips the cost-benefit calculus around month 12.</p>
+        <h3>Provider undermining</h3>
+        <p>User brings Stelo data to their next PCP visit. The PCP — unfamiliar with OTC CGM, time-pressured, or skeptical of self-quantification — says "as long as your A1c is good, you don't need that." A single sentence from a trusted clinician ends the subscription.</p>
       </div>
     </div>
     <div class="hyp">
       <div class="hyp-id">H6</div>
       <div>
+        <h3>Wear friction compounds</h3>
+        <p>Adhesive failures in hot climates, sensor errors, app sync issues, billing confusion, sleep-on-it discomfort. None alone causes churn. After the third lifted sensor in a Phoenix summer, the math shifts.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H7</div>
+      <div>
         <h3>Identity mismatch</h3>
-        <p>The user never fully accepted "person who wears a CGM" as part of how they see themselves — especially among non-insulin T2D patients who don't identify as "sick." Long-term, the visible badge of illness becomes harder to keep wearing.</p>
+        <p>The non-insulin T2D user often doesn't see themselves as "sick." Long-term, the visible badge of illness becomes harder to keep wearing — especially in social, intimate, or professional contexts where the device gets noticed.</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: DISCOVERY METHOD -->
-  <h2><span class="num">04 — Discovery Plan</span>A 90-day mixed-methods program designed to disambiguate the six hypotheses</h2>
+  <!-- SECTION 7: CONTINUOUS DISCOVERY -->
+  <h2><span class="num">07 — Continuous Discovery Practice</span>Weekly customer interviews as the heartbeat — not a one-time research phase</h2>
 
-  <p>Discovery is not just qualitative interviews. The methods have to be matched to the question, and they have to triangulate. Here is how I'd structure the 90 days.</p>
+  <p>The biggest mistake I'd want to avoid is treating discovery as a project with a start and an end. Drawing on Teresa Torres's continuous discovery framework, I'd build the team rhythm around <strong>at least one customer interview per week, every week, indefinitely</strong> — held by a product trio of PM, designer, and engineer rotating attendance. The point of the cadence isn't volume; it's that customer evidence becomes a standing input to every decision, not a special event.</p>
+
+  <h4>The weekly interview discipline</h4>
+  <p>Each week, the trio sits with a real Stelo user — recruited continuously from a standing in-app pool with explicit consent and demographic balance targets. Interviews are <em>story-based</em> rather than opinion-based: we ask about specific recent experiences ("walk me through the last time you decided whether to put on a new sensor") rather than abstractions ("what features would you want?"). The difference matters because people are unreliable narrators of their preferences but reliable reporters of their behavior.</p>
+
+  <p>Interviews are recorded, transcribed, and synthesized into the team's Opportunity Solution Tree (Section 10). Every interview produces at least one captured opportunity — a customer need, pain, or desire — and at least one assumption that needs testing. Nothing gets built from a single interview; patterns across weeks drive prioritization.</p>
+
+  <h4>The Dexcom org reality</h4>
+  <p>The trio model in its purest Torres form ships best at growth-stage companies. At a 7,000+ person medical device firm, weekly interviews flow through Dexcom's existing UX research organization, work alongside clinical affairs and medical advisory boards, and respect the IRB protocols governing any participant interaction touching device behavior. The principle holds — direct, frequent, story-based contact between product builders and patients. The implementation gets re-engineered for the org. Part of the first 30 days in this role is mapping that internal landscape: who's already running patient research, what's the cadence, where are the gaps a product trio can fill rather than duplicate, and where are the IRB and regulatory checkpoints that govern what we can ship from learnings.</p>
 
   <div class="methods">
     <div class="method">
-      <div class="tag">Quantitative · Weeks 1–3</div>
-      <h3>Behavioral cohort analysis</h3>
+      <div class="tag">Cadence · Every Week</div>
+      <h3>Trio interviews with current users</h3>
       <ul>
-        <li>Segment users by tenure, channel, demographic, and engagement decile.</li>
-        <li>Identify the 90-day window preceding churn — which behaviors shift, and how early.</li>
-        <li>Build a churn-risk signal: declining session frequency, missed reorders, support ticket sentiment.</li>
+        <li>One 45-minute interview per week, held jointly by PM + design + engineering.</li>
+        <li>Recruiting prioritizes the M9–M14 risk window plus a rotating mix of long-tenure, recent churners, and reactivated users.</li>
+        <li>Trilingual moderators on rotation — non-English-dominant Type 2 patients are systematically under-sampled in most CGM research, and that gap costs us insight.</li>
+        <li>Intentional over-sampling of diabetic retinopathy, low-vision, and older users — long-tenure T2D populations have high rates of eye complications, which is precisely the cohort most at risk of disengaging from a vision-dependent app.</li>
       </ul>
     </div>
     <div class="method">
-      <div class="tag">Qualitative · Weeks 2–6</div>
-      <h3>30 in-depth user interviews</h3>
+      <div class="tag">Cadence · Every Week</div>
+      <h3>Behavioral analytics review</h3>
       <ul>
-        <li>10 active long-tenure users (M12+), 10 recent churners (M9–M14), 10 reactivated users.</li>
-        <li>Recruit across age, region, language, employment status, comorbidities.</li>
-        <li>Trilingual moderators where possible — non-English-dominant Type 2 patients are systematically under-sampled.</li>
+        <li>Always-on cohort dashboards: tenure curves, session frequency, reorder cadence, support sentiment.</li>
+        <li>Anomaly review at the start of each interview week — the data tells us who to talk to next.</li>
+        <li>Churn-risk signal computed daily, surfaced to the trio with feature attribution.</li>
       </ul>
     </div>
     <div class="method">
-      <div class="tag">Quantitative · Weeks 4–7</div>
-      <h3>Survey at scale (n ≥ 1,500)</h3>
+      <div class="tag">Cadence · Continuously</div>
+      <h3>Assumption testing alongside</h3>
       <ul>
-        <li>JTBD-style "what made you switch / stop" prompts, validated against interview themes.</li>
-        <li>Force-choice ranking of perceived value drivers at month 1, month 6, and month 12.</li>
-        <li>Net-promoter root cause coded against the six hypotheses.</li>
+        <li>Every solution under consideration is decomposed into desirability, viability, feasibility, usability, and ethical assumptions.</li>
+        <li>The riskiest assumptions get small, fast tests — landing pages, prototypes, concierge experiments — before we commit engineering.</li>
+        <li>Assumption tests run in parallel with interviews, not sequentially after.</li>
       </ul>
     </div>
     <div class="method">
-      <div class="tag">Qualitative · Weeks 5–8</div>
-      <h3>Provider &amp; care-team interviews</h3>
+      <div class="tag">Cadence · Quarterly</div>
+      <h3>Deeper-arc methods on demand</h3>
       <ul>
-        <li>15 PCPs, endocrinologists, and CDCESs who manage non-insulin T2D.</li>
-        <li>Understand whether providers are using Stelo data — and the friction that prevents it.</li>
-        <li>Probe the "graduated" narrative: how does a clinician communicate ongoing CGM value after A1c improves?</li>
+        <li>Diary studies with at-risk M8–M11 users when we need lived-experience texture interviews can't reach.</li>
+        <li>Provider research (PCPs, endocrinologists, CDCESs) when opportunities point at the care-team handoff.</li>
+        <li>Validation surveys (n ≥ 1,500) to size opportunities surfaced through interviews — qualitative finds the question, quantitative tells us how big.</li>
       </ul>
     </div>
     <div class="method">
-      <div class="tag">Mixed · Weeks 6–10</div>
-      <h3>Diary studies with at-risk users</h3>
+      <div class="tag">Cadence · Bi-weekly</div>
+      <h3>Cross-trio synthesis</h3>
       <ul>
-        <li>20 users in the M8–M11 window logging daily prompts about value, friction, and intent.</li>
-        <li>Captures the lived texture of pre-churn ambivalence that interviews miss in retrospect.</li>
+        <li>Every two weeks, trios across the Stelo product compare what they're hearing.</li>
+        <li>Patterns that show up in multiple trios get elevated to the shared opportunity tree.</li>
+        <li>Patterns that contradict each other get an explicit decision: dig deeper, or hold and watch.</li>
       </ul>
     </div>
     <div class="method">
-      <div class="tag">Synthesis · Weeks 9–12</div>
-      <h3>Insight synthesis &amp; opportunity sizing</h3>
+      <div class="tag">Cadence · Quarterly</div>
+      <h3>Drop-off autopsy</h3>
       <ul>
-        <li>Cross-method affinity mapping against the hypothesis tree.</li>
-        <li>Each opportunity sized by addressable population × retention lift × engineering cost.</li>
-        <li>Output: a prioritized roadmap of 5–7 retention bets, each with a falsifiable success metric.</li>
+        <li>Structured review of the prior quarter's churners — pulled from interviews, exit signals, and reactivation data.</li>
+        <li>Reviewed by product, clinical, CX, and growth leadership together.</li>
+        <li>Output: which opportunities have shifted in priority, which assumptions held, which got refuted.</li>
       </ul>
     </div>
   </div>
 
-  <!-- SECTION 5: RETENTION CURVE VISUAL -->
-  <h2><span class="num">05 — The Retention Moments Model</span>Reframing the journey as a sequence of jobs, not a single subscription</h2>
+  <p class="pull">"The point of weekly interviews isn't to gather data faster. It's to make customer evidence ambient — so it's already in the room when product decisions get made."<cite>— Adapted from Teresa Torres, Continuous Discovery Habits</cite></p>
+
+  <!-- SECTION 8: RETENTION CURVE VISUAL -->
+  <h2><span class="num">08 — The Retention Moments Model</span>Reframing the journey as a sequence of jobs, not a single subscription</h2>
 
   <p>Retention isn't a property of the product — it's the cumulative result of how well the product matches the user's job at each stage. The "job" of a CGM at month 1 is not the same job at month 12.</p>
 
@@ -777,8 +1034,8 @@
 
   <p>The Discover and Learn stages are where Stelo's current experience excels — pattern recognition, novelty, and clear "aha" moments. The Maintain and Decide stages are where the product has to do more work, and where the discovery findings will either confirm or challenge what's currently shipping.</p>
 
-  <!-- SECTION 6: SEGMENTATION -->
-  <h2><span class="num">06 — Segmentation Hypothesis</span>The "T2D non-insulin" label hides at least four distinct retention archetypes</h2>
+  <!-- SECTION 9: SEGMENTATION -->
+  <h2><span class="num">09 — Segmentation Hypothesis</span>The "T2D non-insulin" label hides at least four distinct retention archetypes</h2>
 
   <p>One of the most common failure modes in healthcare products is treating the diagnostic label as the segment. "Type 2, non-insulin" is a regulatory category, not a behavioral one. Discovery should validate or refute the segmentation below, then prioritize roadmap by segment value × addressability.</p>
 
@@ -821,24 +1078,183 @@
     </table>
   </div>
 
-  <!-- SECTION 7: FUNCTIONAL REQUIREMENTS -->
-  <h2><span class="num">07 — Functional Requirements</span>What the discovery program needs to produce — and what the platform needs to support</h2>
+  <!-- SECTION 10: OPPORTUNITY SOLUTION TREE -->
+  <h2><span class="num">10 — Opportunity Solution Tree</span>How weekly interviews actually drive the roadmap</h2>
 
-  <p>The output of discovery isn't a slide deck. It's a set of validated requirements that engineering, design, and clinical teams can build against. These are the functional requirements I'd expect to surface in priority order.</p>
+  <p>Continuous discovery without a structure for synthesis becomes a stream of anecdotes. The Opportunity Solution Tree is how the trio translates what we hear in interviews into prioritized roadmap bets — with an explicit chain from outcome to opportunity to solution to assumption test. The tree is a living document, updated weekly, and is the team's single source of truth for what we know, what we're betting on, and what we're testing next.</p>
+
+  <div class="curve-card">
+    <div class="curve-title">Opportunity Solution Tree · Living Artifact, Updated Weekly</div>
+    <svg class="curve-svg" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" aria-label="Opportunity Solution Tree showing the outcome at top, three customer opportunities below, two solutions per opportunity, and assumption tests at the bottom">
+      <!-- OUTCOME -->
+      <rect x="270" y="14" width="220" height="58" fill="#1c2024" rx="2"/>
+      <text x="380" y="34" fill="#f4a78c" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" letter-spacing="1.5">DESIRED OUTCOME</text>
+      <text x="380" y="56" fill="#fff8ec" text-anchor="middle" font-family="DM Serif Display, serif" font-size="15">Retained, engaged users at M18</text>
+
+      <!-- Trunk to opportunities -->
+      <line x1="380" y1="72" x2="380" y2="92" stroke="#1c2024" stroke-width="1.5"/>
+      <line x1="130" y1="92" x2="630" y2="92" stroke="#1c2024" stroke-width="1.5"/>
+      <line x1="130" y1="92" x2="130" y2="112" stroke="#1c2024" stroke-width="1.5"/>
+      <line x1="380" y1="92" x2="380" y2="112" stroke="#1c2024" stroke-width="1.5"/>
+      <line x1="630" y1="92" x2="630" y2="112" stroke="#1c2024" stroke-width="1.5"/>
+
+      <!-- OPPORTUNITY 1 -->
+      <rect x="40" y="112" width="180" height="64" fill="#fdf8f0" stroke="#d96846" stroke-width="1.5" rx="2"/>
+      <text x="130" y="130" fill="#d96846" text-anchor="middle" font-family="DM Mono, monospace" font-size="8" letter-spacing="1.3">OPPORTUNITY</text>
+      <text x="130" y="150" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">"I've already learned</text>
+      <text x="130" y="164" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">what I need to know."</text>
+
+      <!-- OPPORTUNITY 2 -->
+      <rect x="290" y="112" width="180" height="64" fill="#fdf8f0" stroke="#d96846" stroke-width="1.5" rx="2"/>
+      <text x="380" y="130" fill="#d96846" text-anchor="middle" font-family="DM Mono, monospace" font-size="8" letter-spacing="1.3">OPPORTUNITY</text>
+      <text x="380" y="150" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">"My doctor never asks</text>
+      <text x="380" y="164" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">about my data."</text>
+
+      <!-- OPPORTUNITY 3 -->
+      <rect x="540" y="112" width="180" height="64" fill="#fdf8f0" stroke="#d96846" stroke-width="1.5" rx="2"/>
+      <text x="630" y="130" fill="#d96846" text-anchor="middle" font-family="DM Mono, monospace" font-size="8" letter-spacing="1.3">OPPORTUNITY</text>
+      <text x="630" y="150" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">"I don't see myself</text>
+      <text x="630" y="164" fill="#1c2024" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">as 'sick.'"</text>
+
+      <!-- Branches to solutions -->
+      <line x1="130" y1="176" x2="130" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="70" y1="196" x2="190" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="70" y1="196" x2="70" y2="216" stroke="#1c2024" stroke-width="1"/>
+      <line x1="190" y1="196" x2="190" y2="216" stroke="#1c2024" stroke-width="1"/>
+
+      <line x1="380" y1="176" x2="380" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="320" y1="196" x2="440" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="320" y1="196" x2="320" y2="216" stroke="#1c2024" stroke-width="1"/>
+      <line x1="440" y1="196" x2="440" y2="216" stroke="#1c2024" stroke-width="1"/>
+
+      <line x1="630" y1="176" x2="630" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="570" y1="196" x2="690" y2="196" stroke="#1c2024" stroke-width="1"/>
+      <line x1="570" y1="196" x2="570" y2="216" stroke="#1c2024" stroke-width="1"/>
+      <line x1="690" y1="196" x2="690" y2="216" stroke="#1c2024" stroke-width="1"/>
+
+      <!-- SOLUTIONS row -->
+      <g font-family="DM Sans, sans-serif" font-size="10" fill="#1c2024">
+        <rect x="22" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="70" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="70" y="247" text-anchor="middle" font-weight="600">Year-over-year</text>
+        <text x="70" y="259" text-anchor="middle" font-weight="600">reflection</text>
+
+        <rect x="142" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="190" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="190" y="247" text-anchor="middle" font-weight="600">Advanced</text>
+        <text x="190" y="259" text-anchor="middle" font-weight="600">metrics tier</text>
+
+        <rect x="272" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="320" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="320" y="247" text-anchor="middle" font-weight="600">One-tap clinician</text>
+        <text x="320" y="259" text-anchor="middle" font-weight="600">summary</text>
+
+        <rect x="392" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="440" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="440" y="247" text-anchor="middle" font-weight="600">Provider portal</text>
+        <text x="440" y="259" text-anchor="middle" font-weight="600">pilot</text>
+
+        <rect x="522" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="570" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="570" y="247" text-anchor="middle" font-weight="600">Wellness</text>
+        <text x="570" y="259" text-anchor="middle" font-weight="600">reframe</text>
+
+        <rect x="642" y="216" width="96" height="48" fill="#c5d9d4" stroke="#1f5f5f" stroke-width="1" rx="2"/>
+        <text x="690" y="232" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#1f5f5f" letter-spacing="1.2">SOLUTION</text>
+        <text x="690" y="247" text-anchor="middle" font-weight="600">Discreet form</text>
+        <text x="690" y="259" text-anchor="middle" font-weight="600">factor R&amp;D</text>
+      </g>
+
+      <!-- Lines to assumption tests -->
+      <line x1="70" y1="264" x2="70" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="190" y1="264" x2="190" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="320" y1="264" x2="320" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="440" y1="264" x2="440" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="570" y1="264" x2="570" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="690" y1="264" x2="690" y2="294" stroke="#1c2024" stroke-width="1" stroke-dasharray="2 2"/>
+
+      <!-- ASSUMPTION TESTS -->
+      <g font-family="DM Sans, sans-serif" font-size="9" fill="#4a4f57">
+        <rect x="22" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="70" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="70" y="322" text-anchor="middle">Will users open</text>
+        <text x="70" y="334" text-anchor="middle">a M11 reflection</text>
+        <text x="70" y="346" text-anchor="middle">prompt?</text>
+
+        <rect x="142" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="190" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="190" y="322" text-anchor="middle">Are advanced</text>
+        <text x="190" y="334" text-anchor="middle">metrics worth</text>
+        <text x="190" y="346" text-anchor="middle">paying for?</text>
+
+        <rect x="272" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="320" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="320" y="322" text-anchor="middle">Will providers</text>
+        <text x="320" y="334" text-anchor="middle">actually open</text>
+        <text x="320" y="346" text-anchor="middle">the summary?</text>
+
+        <rect x="392" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="440" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="440" y="322" text-anchor="middle">Will 5 clinics</text>
+        <text x="440" y="334" text-anchor="middle">use a portal in</text>
+        <text x="440" y="346" text-anchor="middle">a 60-day pilot?</text>
+
+        <rect x="522" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="570" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="570" y="322" text-anchor="middle">Does identity</text>
+        <text x="570" y="334" text-anchor="middle">framing lift M12</text>
+        <text x="570" y="346" text-anchor="middle">retention?</text>
+
+        <rect x="642" y="294" width="96" height="58" fill="#fff8ec" stroke="#b8862e" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+        <text x="690" y="308" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="#b8862e" letter-spacing="1.2">TEST</text>
+        <text x="690" y="322" text-anchor="middle">Will users wear</text>
+        <text x="690" y="334" text-anchor="middle">a smaller form</text>
+        <text x="690" y="346" text-anchor="middle">factor longer?</text>
+      </g>
+
+      <!-- Legend -->
+      <g font-family="DM Mono, monospace" font-size="9" fill="#7a7e85" letter-spacing="1">
+        <rect x="40" y="400" width="14" height="14" fill="#1c2024"/>
+        <text x="62" y="411">Outcome — what we're trying to move</text>
+        <rect x="40" y="420" width="14" height="14" fill="#fdf8f0" stroke="#d96846"/>
+        <text x="62" y="431">Opportunity — a customer need heard in interviews</text>
+        <rect x="430" y="400" width="14" height="14" fill="#c5d9d4" stroke="#1f5f5f"/>
+        <text x="452" y="411">Solution — a thing we could build</text>
+        <rect x="430" y="420" width="14" height="14" fill="#fff8ec" stroke="#b8862e" stroke-dasharray="3 2"/>
+        <text x="452" y="431">Assumption test — what has to be true for it to work</text>
+      </g>
+    </svg>
+  </div>
+
+  <p>The tree shown is a simplified view. In practice, every opportunity branches into multiple solution candidates, and every solution decomposes into the riskiest desirability, viability, feasibility, usability, and ethical assumptions that have to hold. <strong>The tree's job isn't to be comprehensive — it's to make the team's reasoning visible and contestable.</strong> When a stakeholder asks "why are we building this and not that," the answer points to the tree, the interviews behind it, and the tests we've already run.</p>
+
+  <h4>How prioritization actually happens</h4>
+  <p>Opportunities are weighed by reach (how many users in which segments), severity (how acute the pain), and frequency (how often it surfaces). Solutions are prioritized by retention impact estimate, assumption risk, and engineering cost. The trio commits to a small number of bets per quarter, runs assumption tests in weeks rather than months, and updates the tree based on what we learn. Anything that survives the tree gets built; anything that doesn't gets parked with a clear note on what would have to change.</p>
+
+  <!-- SECTION 11: DISCOVERY OUTPUTS & LIKELY REQUIREMENTS -->
+  <h2><span class="num">11 — Discovery Outputs &amp; Likely Requirements</span>What the program delivers — and what platform requirements would likely emerge</h2>
+
+  <p>Committing to specific platform requirements before discovery is the same trap as committing to features before research. So this section captures two things: <strong>(a)</strong> the artifacts the discovery program will produce by day 90 regardless of what it finds, and <strong>(b)</strong> the platform requirements <em>likely</em> to emerge given the working hypotheses, with explicit conditional framing on each.</p>
+
+  <h4>Day-90 deliverables</h4>
+  <p>Independent of what discovery finds, the program produces: a validated retention hypothesis tree with evidence weighting per hypothesis; a living Opportunity Solution Tree updated weekly; either validated working segmentation or its refutation; a prioritized portfolio of retention bets with assumption tests in flight; and the standing continuous discovery infrastructure (recruiting, cadence, synthesis tooling, drop-off autopsy ritual) for the team to keep using.</p>
+
+  <h4>Likely platform requirements (each conditional)</h4>
+  <p>The requirements below are the shape of what would likely emerge — not commitments. Performance bars, scope, and priority all get set after discovery sees the data, not before.</p>
 
   <div class="req-block">
-    <div class="req-id">FR-01 · Churn Prediction Model</div>
+    <div class="req-id">FR-01 · Churn Risk Signal · Conditional on H1, H6 patterns</div>
     <h3>A propensity-to-lapse signal computed continuously per user</h3>
     <ul>
-      <li><strong>Inputs:</strong> session frequency trend, sensor reorder cadence, support contact sentiment, in-app feature drop-off, days since last "aha" event, tenure, claimed segment.</li>
-      <li><strong>Output:</strong> per-user lapse risk score (0–1), refreshed daily, with feature attribution for the top three drivers.</li>
-      <li><strong>Performance bar:</strong> precision ≥ 0.65 at recall ≥ 0.50 for 60-day-forward churn, validated on a held-out cohort before any intervention is gated on it.</li>
-      <li><strong>Eval &amp; guardrails:</strong> calibration audited monthly across age, gender, ethnicity, and language to surface disparate accuracy. No automated subscription action without a human-in-the-loop checkpoint.</li>
+      <li><strong>Likely inputs:</strong> session frequency trend, sensor reorder cadence, support contact sentiment, in-app feature drop-off, days since last "aha" event, tenure, claimed segment.</li>
+      <li><strong>Likely output:</strong> per-user lapse risk score, refreshed daily, with feature attribution for the top three drivers.</li>
+      <li><strong>Performance bar:</strong> set post-discovery once we know signal density, class balance, and what intervention class is being gated. Generic precision/recall targets pre-committed before seeing data are theater, not engineering.</li>
+      <li><strong>Eval &amp; guardrails:</strong> calibration audited monthly across age, gender, ethnicity, and language to surface disparate accuracy. No automated subscription action without human-in-the-loop. Any model touching device behavior cleared through clinical affairs and SaMD review.</li>
     </ul>
   </div>
 
   <div class="req-block">
-    <div class="req-id">FR-02 · Segment Assignment Service</div>
+    <div class="req-id">FR-02 · Segment Assignment Service · Conditional on segmentation validating</div>
     <h3>A behaviorally derived segment classifier exposed to all surfaces</h3>
     <ul>
       <li><strong>Source signals:</strong> onboarding intake, first-30-day behavioral fingerprint, claimed comorbidities, medication context (where consented).</li>
@@ -849,7 +1265,7 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">FR-03 · Adaptive Insight Engine</div>
+    <div class="req-id">FR-03 · Adaptive Insight Engine · Likely needed regardless</div>
     <h3>The app's insight content has to evolve with tenure, not repeat</h3>
     <ul>
       <li>Content library tagged by tenure stage (Discover / Learn / Maintain / Decide) and segment.</li>
@@ -860,7 +1276,7 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">FR-04 · Care-Team Hand-off Surface</div>
+    <div class="req-id">FR-04 · Care-Team Hand-off Surface · Priority depends on H5 (Provider Undermining)</div>
     <h3>A lightweight provider-facing artifact users can actually share</h3>
     <ul>
       <li>One-tap export of a clinically meaningful summary (TIR, GMI, time-above-range, behavioral notes) in a format providers will actually open.</li>
@@ -871,29 +1287,31 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">FR-05 · Re-Engagement Experimentation Framework</div>
-    <h3>Infrastructure to test retention bets quickly without compromising clinical integrity</h3>
+    <div class="req-id">FR-05 · Re-Engagement Experimentation Framework · Adapted for SaMD constraints</div>
+    <h3>Infrastructure to test retention bets without compromising clinical or regulatory integrity</h3>
     <ul>
       <li>Cohort-based assignment with clean holdouts across the M9–M14 risk window.</li>
       <li>Pre-registered hypotheses, primary metric, and stop conditions before any test ships.</li>
       <li>Asymmetric stop rules: experiments that move retention without affecting clinical outcomes proceed; those with even small adverse signal pause for review.</li>
-      <li>Test ledger visible to clinical, legal, and design — every running test, what it's measuring, who owns it.</li>
+      <li>SaMD discipline: tests touching glucose interpretation, alerts, or anything affecting clinical decisions go through clinical affairs review and 510(k) impact assessment before launch — not consumer A/B testing.</li>
+      <li>Test ledger visible to clinical, legal, regulatory, and design — every running test, what it's measuring, who owns it.</li>
     </ul>
   </div>
 
   <div class="req-block">
-    <div class="req-id">FR-06 · Voice-of-Customer Pipeline</div>
-    <h3>A continuous discovery loop, not a one-time program</h3>
+    <div class="req-id">FR-06 · Continuous Discovery Infrastructure</div>
+    <h3>Weekly customer interviews as a non-negotiable team practice, with the tooling to make them frictionless</h3>
     <ul>
-      <li>Always-on recruiting from in-app pool with consent management and demographic balance targets.</li>
-      <li>Standing panel of M9–M14 users for rapid qualitative reads (≤ 7-day turnaround).</li>
-      <li>Synthesis tooling that ties qualitative themes back to behavioral cohorts so insight drives roadmap, not anecdote.</li>
-      <li>Quarterly "drop-off autopsy" reviewed by product, clinical, and CX leadership.</li>
+      <li><strong>Recruiting pipeline:</strong> standing in-app pool that delivers ≥1 qualified, consented user per week per trio, with demographic balance targets and trilingual coverage.</li>
+      <li><strong>Story-based interview kit:</strong> shared moderator training, question library, recording &amp; transcription pipeline; first 30 days of new-PM onboarding includes joining four interviews.</li>
+      <li><strong>Living Opportunity Solution Tree:</strong> the team's source of truth, updated weekly by the trio, visible to leadership and stakeholders without translation.</li>
+      <li><strong>Assumption test queue:</strong> every active solution has its riskiest assumptions logged, prioritized by risk × evidence, with a designated test owner.</li>
+      <li><strong>Cross-trio synthesis ritual:</strong> bi-weekly pattern review across product surfaces; quarterly drop-off autopsy reviewed by product, clinical, and CX leadership.</li>
     </ul>
   </div>
 
-  <!-- SECTION 8: METRICS -->
-  <h2><span class="num">08 — Success Metrics</span>What good looks like — and what to be skeptical of</h2>
+  <!-- SECTION 12: METRICS -->
+  <h2><span class="num">12 — Success Metrics</span>What good looks like — and what to be skeptical of</h2>
 
   <p>Retention metrics are easy to game. If the only thing we measure is M12+ retention rate, we'll find ways to inflate it that don't serve users. The metric architecture has to balance growth, clinical, and experiential outcomes.</p>
 
@@ -905,8 +1323,8 @@
     </div>
     <div class="metric">
       <div class="label">Clinical Companion</div>
-      <div class="name">Sustained A1c / TIR Improvement</div>
-      <div class="desc">For users with linked clinical data, the percentage maintaining their gains 12+ months after onboarding. Retention without outcomes is hollow.</div>
+      <div class="name">Sustained TIR / GMI Improvement</div>
+      <div class="desc">TIR (time-in-range) and GMI (glucose management indicator) are captured directly in Stelo and trackable per cohort over time. A1c — the gold-standard validation — requires clinical data linkage that doesn't exist in Stelo today; building that pathway is itself a discovery output.</div>
     </div>
     <div class="metric">
       <div class="label">Leading Indicator</div>
@@ -930,8 +1348,8 @@
     </div>
   </div>
 
-  <!-- SECTION 9: RISKS -->
-  <h2><span class="num">09 — Risks &amp; Guardrails</span>What I'd watch for, and how I'd protect against it</h2>
+  <!-- SECTION 13: RISKS -->
+  <h2><span class="num">13 — Risks &amp; Guardrails</span>What I'd watch for, and how I'd protect against it</h2>
 
   <div class="risk">
     <div>
@@ -962,7 +1380,31 @@
       <div class="risk-label">Risk · Discovery</div>
       <h3>Confirmation bias in the synthesis</h3>
     </div>
-    <p>Six hypotheses, run by people with priors, will tend to find what they expect. Synthesis uses a structured framework where each hypothesis must be weighted with both confirming and disconfirming evidence before any roadmap call is made.</p>
+    <p>Seven hypotheses, run by people with priors, will tend to find what they expect. Synthesis uses a structured framework where each hypothesis must be weighted with both confirming and disconfirming evidence before any roadmap call is made.</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Competitive</div>
+      <h3>Optimizing retention against the wrong opponent</h3>
+    </div>
+    <p>Users don't just stay or leave — they switch. Retention work that doesn't account for Abbott Lingo, Levels, or other OTC alternatives may move the wrong metric. Discovery includes "did you try or consider anything else" as a standard probe, and the metric architecture distinguishes "lost to switching" from "lost entirely."</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Pharmacological Disruption</div>
+      <h3>GLP-1 reshaping the use case under us</h3>
+    </div>
+    <p>If GLP-1 adoption accelerates and CGM value drops correspondingly for that segment, retention work focused on insight features may be working against a structural headwind. The roadmap has to include an explicit GLP-1 strategy — co-management, titration support, post-medication-titration monitoring — not treat it as a side note.</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Internal Cannibalization</div>
+      <h3>Stelo retention at the expense of G7 graduation</h3>
+    </div>
+    <p>If we build features that keep clinically progressing users on Stelo who would otherwise transition to prescription Dexcom G7, we may optimize against the larger-revenue prescription business. Cross-portfolio metric reviews catch this; roadmap calls explicitly weigh Stelo retention vs. G7 funnel health, and "graduation to G7" is treated as a positive outcome, not a churn event.</p>
   </div>
 
   <!-- CLOSING -->
