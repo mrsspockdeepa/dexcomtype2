@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discovery Case Study — Dexcom Stelo · Jen Deepa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f1e8;
+    --bg-card: #fdf8f0;
+    --ink: #1c2024;
+    --ink-soft: #4a4f57;
+    --ink-muted: #7a7e85;
+    --rule: #d9cdb8;
+    --rule-soft: #e8dfce;
+    --coral: #d96846;
+    --coral-soft: #f4a78c;
+    --teal: #1f5f5f;
+    --teal-soft: #c5d9d4;
+    --gold: #b8862e;
+    --cream: #fff8ec;
+    --shadow: 0 1px 0 rgba(28,32,36,0.04), 0 12px 40px -20px rgba(28,32,36,0.18);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 32px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* HEADER */
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 14px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .meta-row a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-muted);
+    padding-bottom: 1px;
+  }
+  .meta-row a:hover { color: var(--coral); border-bottom-color: var(--coral); }
+
+  .kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin: 56px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .kicker::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--coral);
+  }
+
+  h1.title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6.4vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0 0 28px;
+    font-weight: 400;
+  }
+  h1.title em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .deck {
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 0 40px;
+    font-weight: 300;
+  }
+
+  .byline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    margin-bottom: 64px;
+  }
+  .byline-cell .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .byline-cell .value {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* SECTION HEADERS */
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.6vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 72px 0 20px;
+    font-weight: 400;
+    position: relative;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  h2 .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--coral);
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    border: none;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+
+  h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin: 24px 0 8px;
+  }
+
+  p { margin: 0 0 18px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  a.inline { color: var(--coral); text-decoration: none; border-bottom: 1px solid var(--coral-soft); }
+  a.inline:hover { border-bottom-color: var(--coral); }
+
+  /* PULL QUOTE */
+  .pull {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 30px);
+    line-height: 1.3;
+    color: var(--ink);
+    border-left: 3px solid var(--coral);
+    padding: 8px 0 8px 28px;
+    margin: 36px 0;
+    max-width: 720px;
+  }
+  .pull cite {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 14px;
+  }
+
+  /* CALLOUT / STAT CARDS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 32px 0 40px;
+    border: 1px solid var(--ink);
+    background: var(--cream);
+  }
+  .stat {
+    padding: 24px 22px;
+    border-right: 1px solid var(--ink);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .figure {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--coral);
+    margin-bottom: 8px;
+  }
+  .stat .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* HYPOTHESIS CARDS */
+  .hypotheses {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 24px 0 36px;
+  }
+  .hyp {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow);
+  }
+  .hyp:hover {
+    border-color: var(--coral);
+    transform: translateX(2px);
+  }
+  .hyp .hyp-id {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--coral);
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .hyp h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .hyp p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* TIMELINE / RETENTION CURVE */
+  .curve-card {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    padding: 32px 28px 24px;
+    margin: 28px 0 36px;
+  }
+  .curve-card .curve-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 18px;
+  }
+  .curve-svg { width: 100%; height: auto; display: block; }
+
+  /* DISCOVERY METHOD GRID */
+  .methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 28px 0 36px;
+    border: 1px solid var(--ink);
+  }
+  .method {
+    padding: 24px 22px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--bg-card);
+  }
+  .method:nth-child(even) { border-right: none; }
+  .method:nth-last-child(-n+2) { border-bottom: none; }
+  .method .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .method h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+  .method ul { margin: 8px 0 0; padding-left: 18px; }
+  .method li { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 4px; }
+
+  /* SEGMENT TABLE */
+  .seg-table {
+    border: 1px solid var(--ink);
+    margin: 24px 0 36px;
+    background: var(--bg-card);
+    overflow-x: auto;
+  }
+  .seg-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .seg-table th {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 500;
+  }
+  .seg-table td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .seg-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .seg-table tr:first-child td { border-top: none; }
+
+  /* REQUIREMENTS LIST */
+  .req-block {
+    background: var(--bg-card);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 18px 0;
+  }
+  .req-block .req-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .req-block h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .req-block ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+  }
+  .req-block li {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .req-block li strong { color: var(--ink); }
+
+  /* METRICS */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0 36px;
+  }
+  .metric {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+  }
+  .metric .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .metric .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .metric .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* RISKS */
+  .risk {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  .risk .risk-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 4px;
+  }
+  .risk h3 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+  .risk p { margin: 0; font-size: 13.5px; line-height: 1.55; }
+
+  /* CLOSING */
+  .close-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px 40px;
+    margin: 64px 0 0;
+    position: relative;
+  }
+  .close-card .kicker {
+    color: var(--coral-soft);
+    margin-top: 0;
+  }
+  .close-card .kicker::before { background: var(--coral-soft); }
+  .close-card h2 {
+    color: var(--cream);
+    border-top: none;
+    padding-top: 0;
+    margin-top: 8px;
+  }
+  .close-card p { color: rgba(253, 248, 240, 0.85); }
+  .close-card a.inline { color: var(--coral-soft); border-bottom-color: var(--coral-soft); }
+  .close-card a.inline:hover { color: var(--cream); }
+
+  .close-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(253, 248, 240, 0.18);
+  }
+  .close-grid .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral-soft);
+    margin-bottom: 8px;
+  }
+  .close-grid .value {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+
+  .footer-meta {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 20px 80px; }
+    .byline { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--ink); }
+    .stat:last-child { border-bottom: none; }
+    .methods { grid-template-columns: 1fr; }
+    .method { border-right: none; border-bottom: 1px solid var(--ink); }
+    .method:last-child { border-bottom: none; }
+    .metric-grid { grid-template-columns: 1fr; }
+    .risk { grid-template-columns: 1fr; }
+    .close-card { padding: 32px 24px; }
+    .close-grid { grid-template-columns: 1fr; gap: 18px; }
+    .hyp { grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 18px; }
+    .hyp .hyp-id { font-size: 26px; }
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal 0.7s ease forwards;
+  }
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal:nth-child(1) { animation-delay: 0.05s; }
+  .reveal:nth-child(2) { animation-delay: 0.15s; }
+  .reveal:nth-child(3) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="meta-row reveal">
+    <span>Product Discovery Case Study</span>
+    <span><a href="https://mrsspockdeepa.github.io">← mrsspockdeepa.github.io</a></span>
+  </div>
+
+  <div class="kicker reveal">Dexcom · Principal PM, Discovery</div>
+
+  <h1 class="title reveal">Why do they leave at month twelve <em>— and what would bring them back?</em></h1>
+
+  <p class="deck reveal">A discovery framework for understanding Type 2 diabetes patient needs and rebuilding the Stelo experience around the moment retention falls off a cliff.</p>
+
+  <div class="byline">
+    <div class="byline-cell">
+      <div class="label">Author</div>
+      <div class="value">Jen Deepa</div>
+    </div>
+    <div class="byline-cell">
+      <div class="label">Role Target</div>
+      <div class="value">Principal PM, Discovery</div>
+    </div>
+    <div class="byline-cell">
+      <div class="label">Surface</div>
+      <div class="value">Stelo · iOS, Android</div>
+    </div>
+    <div class="byline-cell">
+      <div class="label">Read Time</div>
+      <div class="value">~9 minutes</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: THE OPENING -->
+  <h2><span class="num">01 — The Opportunity</span>A 25-million-person market with a retention problem hiding in plain sight</h2>
+
+  <p>Stelo is the first OTC continuous glucose biosensor in the United States, designed for the roughly 25 million American adults living with Type 2 diabetes who don't use insulin, plus an even larger prediabetic population. It's a category-defining product — but the category itself has a known weakness: behavior-change tools driven by self-quantification tend to lose users at the one-year mark, when novelty fades, the data starts repeating itself, and the wearable becomes one more recurring expense to justify.</p>
+
+  <p>The clinical literature already tells us why CGM works for non-insulin Type 2: it surfaces the cause-and-effect between food, sleep, stress, movement, and glucose in a way no clinician visit ever could. But that same literature also flags the central design challenge: <strong>once the initial discovery phase is complete, the user's "job-to-be-done" changes — and most CGM apps don't change with it.</strong></p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="figure">25M+</div>
+      <div class="desc">U.S. adults with Type 2 diabetes not on insulin — Stelo's primary TAM.</div>
+    </div>
+    <div class="stat">
+      <div class="figure">$89/mo</div>
+      <div class="desc">Subscription price point. LTV is entirely a function of months retained.</div>
+    </div>
+    <div class="stat">
+      <div class="figure">~M12</div>
+      <div class="desc">The retention cliff this case study targets — the moment the product stops growing with the user.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PROBLEM FRAMING -->
+  <h2><span class="num">02 — Problem Framing</span>What we don't yet know about the people who leave</h2>
+
+  <p>Before designing anything, I'd want to draw a clean line between the things we already know and the things we're guessing at. Discovery is most valuable when it eliminates internal pattern-matching disguised as insight.</p>
+
+  <h4>What the data probably already shows</h4>
+  <p>Sensor reorder cadence, app session frequency, in-app feature usage, support tickets, NPS by tenure. These are necessary but not sufficient — they tell us <em>that</em> people leave, not <em>why</em>.</p>
+
+  <h4>What we almost certainly don't know yet</h4>
+  <p>Whether the month-12 drop-off is one cohort or several. Whether users churn because the product failed them or because it succeeded too well — i.e., they internalized the lessons and don't feel they need it anymore. Whether the drop-off is preceded by a recoverable lapse or a hard decision. Whether financial, clinical, social, or psychological factors dominate. These are the questions discovery has to answer before the roadmap can be trusted.</p>
+
+  <p class="pull">"They don't leave because the product broke. They leave because the product didn't grow up with them."<cite>— A working hypothesis worth testing</cite></p>
+
+  <!-- SECTION 3: HYPOTHESES -->
+  <h2><span class="num">03 — Working Hypotheses</span>Six explanations for the retention cliff — each testable, each with a different fix</h2>
+
+  <p>I'd enter discovery with a hypothesis tree, not a single theory. Each hypothesis points to a different intervention, so distinguishing among them isn't academic — it determines what we build first.</p>
+
+  <div class="hypotheses">
+    <div class="hyp">
+      <div class="hyp-id">H1</div>
+      <div>
+        <h3>Insight saturation</h3>
+        <p>By month 12, users have learned what their body does. The app keeps showing the same patterns. The novelty curve has flattened and the product no longer earns its monthly cost.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H2</div>
+      <div>
+        <h3>Behavior-change success paradox</h3>
+        <p>Users who actually changed their habits feel they "graduated." Their A1c improved, their PCP took them off concern, and continuing to wear a sensor feels redundant — even though stopping is exactly when relapse risk peaks.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H3</div>
+      <div>
+        <h3>Lifestyle context shift</h3>
+        <p>A new medication (e.g., GLP-1 initiation), a job change, a caregiving role, or a financial squeeze pushes the sensor down the priority list. The drop-off is environmental, not motivational.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H4</div>
+      <div>
+        <h3>Loneliness of the loop</h3>
+        <p>The user has rich data but no one to interpret it with. Their PCP doesn't ask about it. Their family doesn't engage. The feedback loop stays solitary and eventually feels pointless.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H5</div>
+      <div>
+        <h3>Friction compounding</h3>
+        <p>Small annoyances — sensor failures, adhesive issues, app sync errors, billing confusion — accumulate quietly. None alone causes churn, but the cumulative weight tips the cost-benefit calculus around month 12.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <div class="hyp-id">H6</div>
+      <div>
+        <h3>Identity mismatch</h3>
+        <p>The user never fully accepted "person who wears a CGM" as part of how they see themselves — especially among non-insulin T2D patients who don't identify as "sick." Long-term, the visible badge of illness becomes harder to keep wearing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: DISCOVERY METHOD -->
+  <h2><span class="num">04 — Discovery Plan</span>A 90-day mixed-methods program designed to disambiguate the six hypotheses</h2>
+
+  <p>Discovery is not just qualitative interviews. The methods have to be matched to the question, and they have to triangulate. Here is how I'd structure the 90 days.</p>
+
+  <div class="methods">
+    <div class="method">
+      <div class="tag">Quantitative · Weeks 1–3</div>
+      <h3>Behavioral cohort analysis</h3>
+      <ul>
+        <li>Segment users by tenure, channel, demographic, and engagement decile.</li>
+        <li>Identify the 90-day window preceding churn — which behaviors shift, and how early.</li>
+        <li>Build a churn-risk signal: declining session frequency, missed reorders, support ticket sentiment.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Qualitative · Weeks 2–6</div>
+      <h3>30 in-depth user interviews</h3>
+      <ul>
+        <li>10 active long-tenure users (M12+), 10 recent churners (M9–M14), 10 reactivated users.</li>
+        <li>Recruit across age, region, language, employment status, comorbidities.</li>
+        <li>Trilingual moderators where possible — non-English-dominant Type 2 patients are systematically under-sampled.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Quantitative · Weeks 4–7</div>
+      <h3>Survey at scale (n ≥ 1,500)</h3>
+      <ul>
+        <li>JTBD-style "what made you switch / stop" prompts, validated against interview themes.</li>
+        <li>Force-choice ranking of perceived value drivers at month 1, month 6, and month 12.</li>
+        <li>Net-promoter root cause coded against the six hypotheses.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Qualitative · Weeks 5–8</div>
+      <h3>Provider &amp; care-team interviews</h3>
+      <ul>
+        <li>15 PCPs, endocrinologists, and CDCESs who manage non-insulin T2D.</li>
+        <li>Understand whether providers are using Stelo data — and the friction that prevents it.</li>
+        <li>Probe the "graduated" narrative: how does a clinician communicate ongoing CGM value after A1c improves?</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Mixed · Weeks 6–10</div>
+      <h3>Diary studies with at-risk users</h3>
+      <ul>
+        <li>20 users in the M8–M11 window logging daily prompts about value, friction, and intent.</li>
+        <li>Captures the lived texture of pre-churn ambivalence that interviews miss in retrospect.</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="tag">Synthesis · Weeks 9–12</div>
+      <h3>Insight synthesis &amp; opportunity sizing</h3>
+      <ul>
+        <li>Cross-method affinity mapping against the hypothesis tree.</li>
+        <li>Each opportunity sized by addressable population × retention lift × engineering cost.</li>
+        <li>Output: a prioritized roadmap of 5–7 retention bets, each with a falsifiable success metric.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 5: RETENTION CURVE VISUAL -->
+  <h2><span class="num">05 — The Retention Moments Model</span>Reframing the journey as a sequence of jobs, not a single subscription</h2>
+
+  <p>Retention isn't a property of the product — it's the cumulative result of how well the product matches the user's job at each stage. The "job" of a CGM at month 1 is not the same job at month 12.</p>
+
+  <div class="curve-card">
+    <div class="curve-title">User Journey · Job-to-be-Done by Tenure</div>
+    <svg class="curve-svg" viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" aria-label="Retention curve showing four stages with the month-12 cliff highlighted">
+      <!-- Axis -->
+      <line x1="50" y1="220" x2="730" y2="220" stroke="#1c2024" stroke-width="1.5"/>
+      <line x1="50" y1="40" x2="50" y2="220" stroke="#1c2024" stroke-width="1.5"/>
+
+      <!-- Curve -->
+      <path d="M 50 70 Q 180 60, 280 95 T 480 145 Q 540 165, 580 215 T 730 235"
+            fill="none" stroke="#d96846" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Cliff highlight -->
+      <rect x="500" y="40" width="100" height="180" fill="#d96846" opacity="0.08"/>
+      <line x1="550" y1="40" x2="550" y2="220" stroke="#d96846" stroke-dasharray="3 3" stroke-width="1"/>
+      <text x="555" y="55" font-family="DM Mono, monospace" font-size="10" fill="#d96846" letter-spacing="1.5">M12 CLIFF</text>
+
+      <!-- Stage markers -->
+      <g font-family="DM Mono, monospace" font-size="9" fill="#7a7e85" letter-spacing="1">
+        <text x="50" y="245">M0</text>
+        <text x="200" y="245">M1–M3</text>
+        <text x="370" y="245">M4–M9</text>
+        <text x="530" y="245">M10–M14</text>
+        <text x="680" y="245">M15+</text>
+      </g>
+
+      <!-- Stage labels -->
+      <g font-family="DM Sans, sans-serif" font-size="11" fill="#1c2024" font-weight="600">
+        <text x="100" y="30">DISCOVER</text>
+        <text x="240" y="80">LEARN</text>
+        <text x="380" y="125">MAINTAIN</text>
+        <text x="540" y="195">DECIDE</text>
+      </g>
+
+      <!-- Stage descriptions -->
+      <g font-family="DM Sans, sans-serif" font-size="10" fill="#4a4f57">
+        <text x="100" y="265">"What does my body do?"</text>
+        <text x="245" y="265">"What should I change?"</text>
+        <text x="380" y="265">"Am I still on track?"</text>
+        <text x="535" y="265">"Is this still worth it?"</text>
+      </g>
+
+      <!-- Y-axis label -->
+      <text x="20" y="130" font-family="DM Mono, monospace" font-size="9" fill="#7a7e85" transform="rotate(-90 20 130)">PRODUCT VALUE PER $</text>
+    </svg>
+  </div>
+
+  <p>The Discover and Learn stages are where Stelo's current experience excels — pattern recognition, novelty, and clear "aha" moments. The Maintain and Decide stages are where the product has to do more work, and where the discovery findings will either confirm or challenge what's currently shipping.</p>
+
+  <!-- SECTION 6: SEGMENTATION -->
+  <h2><span class="num">06 — Segmentation Hypothesis</span>The "T2D non-insulin" label hides at least four distinct retention archetypes</h2>
+
+  <p>One of the most common failure modes in healthcare products is treating the diagnostic label as the segment. "Type 2, non-insulin" is a regulatory category, not a behavioral one. Discovery should validate or refute the segmentation below, then prioritize roadmap by segment value × addressability.</p>
+
+  <div class="seg-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Working Segment</th>
+          <th>Primary Job</th>
+          <th>Drop-off Signal</th>
+          <th>Likely Lever</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>The Newly Diagnosed</td>
+          <td>Make sense of the diagnosis; build a coping system.</td>
+          <td>Information overload, anxiety spikes around M3–M6.</td>
+          <td>Education pacing, emotional support, clinician handoff.</td>
+        </tr>
+        <tr>
+          <td>The Disciplined Optimizer</td>
+          <td>Hit a target A1c through controlled experimentation.</td>
+          <td>Hits target by M9; questions ongoing value.</td>
+          <td>Long-arc challenges, advanced metrics, identity reinforcement.</td>
+        </tr>
+        <tr>
+          <td>The GLP-1 Co-User</td>
+          <td>Pair CGM with weight-loss medication for visible feedback.</td>
+          <td>Stops sensor when medication produces weight loss.</td>
+          <td>Co-managed program; reposition CGM as durability insurance.</td>
+        </tr>
+        <tr>
+          <td>The Reluctant Wearer</td>
+          <td>Comply with provider/family pressure; minimize visibility.</td>
+          <td>Adhesive issues, social discomfort, low engagement throughout.</td>
+          <td>Form factor, discretion features, reframe around pleasure not duty.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 7: FUNCTIONAL REQUIREMENTS -->
+  <h2><span class="num">07 — Functional Requirements</span>What the discovery program needs to produce — and what the platform needs to support</h2>
+
+  <p>The output of discovery isn't a slide deck. It's a set of validated requirements that engineering, design, and clinical teams can build against. These are the functional requirements I'd expect to surface in priority order.</p>
+
+  <div class="req-block">
+    <div class="req-id">FR-01 · Churn Prediction Model</div>
+    <h3>A propensity-to-lapse signal computed continuously per user</h3>
+    <ul>
+      <li><strong>Inputs:</strong> session frequency trend, sensor reorder cadence, support contact sentiment, in-app feature drop-off, days since last "aha" event, tenure, claimed segment.</li>
+      <li><strong>Output:</strong> per-user lapse risk score (0–1), refreshed daily, with feature attribution for the top three drivers.</li>
+      <li><strong>Performance bar:</strong> precision ≥ 0.65 at recall ≥ 0.50 for 60-day-forward churn, validated on a held-out cohort before any intervention is gated on it.</li>
+      <li><strong>Eval &amp; guardrails:</strong> calibration audited monthly across age, gender, ethnicity, and language to surface disparate accuracy. No automated subscription action without a human-in-the-loop checkpoint.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">FR-02 · Segment Assignment Service</div>
+    <h3>A behaviorally derived segment classifier exposed to all surfaces</h3>
+    <ul>
+      <li><strong>Source signals:</strong> onboarding intake, first-30-day behavioral fingerprint, claimed comorbidities, medication context (where consented).</li>
+      <li><strong>Output contract:</strong> a primary segment label plus confidence; segments are mutable and re-evaluated quarterly.</li>
+      <li><strong>Consumers:</strong> in-app content engine, lifecycle messaging, support tooling, clinician portal.</li>
+      <li><strong>Auditability:</strong> every segment change is logged with the triggering signal so clinical and CX teams can investigate.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">FR-03 · Adaptive Insight Engine</div>
+    <h3>The app's insight content has to evolve with tenure, not repeat</h3>
+    <ul>
+      <li>Content library tagged by tenure stage (Discover / Learn / Maintain / Decide) and segment.</li>
+      <li>Insight cadence throttles automatically — a long-tenure user who has seen the "stress raises glucose" lesson five times should not see it a sixth.</li>
+      <li>New insight types added at predictable intervals: trend comparison, peer-cohort benchmarks (privacy-preserved), seasonal pattern recall, year-over-year reflection.</li>
+      <li>Editorial guardrails: no insight is generated for a user without sufficient supporting data; uncertainty surfaced explicitly.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">FR-04 · Care-Team Hand-off Surface</div>
+    <h3>A lightweight provider-facing artifact users can actually share</h3>
+    <ul>
+      <li>One-tap export of a clinically meaningful summary (TIR, GMI, time-above-range, behavioral notes) in a format providers will actually open.</li>
+      <li>Configurable sharing — ongoing read-only link, point-in-time PDF, or fax-friendly export for older practices.</li>
+      <li>Bidirectional: a provider note or check-in goal flows back into the app and influences the insight engine.</li>
+      <li>HIPAA-aligned consent flow with clear scope, revocation, and audit log.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">FR-05 · Re-Engagement Experimentation Framework</div>
+    <h3>Infrastructure to test retention bets quickly without compromising clinical integrity</h3>
+    <ul>
+      <li>Cohort-based assignment with clean holdouts across the M9–M14 risk window.</li>
+      <li>Pre-registered hypotheses, primary metric, and stop conditions before any test ships.</li>
+      <li>Asymmetric stop rules: experiments that move retention without affecting clinical outcomes proceed; those with even small adverse signal pause for review.</li>
+      <li>Test ledger visible to clinical, legal, and design — every running test, what it's measuring, who owns it.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">FR-06 · Voice-of-Customer Pipeline</div>
+    <h3>A continuous discovery loop, not a one-time program</h3>
+    <ul>
+      <li>Always-on recruiting from in-app pool with consent management and demographic balance targets.</li>
+      <li>Standing panel of M9–M14 users for rapid qualitative reads (≤ 7-day turnaround).</li>
+      <li>Synthesis tooling that ties qualitative themes back to behavioral cohorts so insight drives roadmap, not anecdote.</li>
+      <li>Quarterly "drop-off autopsy" reviewed by product, clinical, and CX leadership.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 8: METRICS -->
+  <h2><span class="num">08 — Success Metrics</span>What good looks like — and what to be skeptical of</h2>
+
+  <p>Retention metrics are easy to game. If the only thing we measure is M12+ retention rate, we'll find ways to inflate it that don't serve users. The metric architecture has to balance growth, clinical, and experiential outcomes.</p>
+
+  <div class="metric-grid">
+    <div class="metric">
+      <div class="label">North Star</div>
+      <div class="name">Retained, Engaged Users at M18</div>
+      <div class="desc">Users still on subscription <em>and</em> showing evidence of ongoing behavioral engagement (not dormant subscribers). Tenure past the cliff is the real test.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Clinical Companion</div>
+      <div class="name">Sustained A1c / TIR Improvement</div>
+      <div class="desc">For users with linked clinical data, the percentage maintaining their gains 12+ months after onboarding. Retention without outcomes is hollow.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Leading Indicator</div>
+      <div class="name">M9 Engagement Health Score</div>
+      <div class="desc">Composite of session frequency trend, feature breadth, insight engagement, and reorder timing — used to validate interventions early.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Equity Guardrail</div>
+      <div class="name">Retention Parity Across Segments</div>
+      <div class="desc">Retention gains have to materialize across age, language, geography, and income segments — not just the easiest-to-reach ones.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Experience</div>
+      <div class="name">Voluntary Reactivation Rate</div>
+      <div class="desc">Of users who do churn, what percentage return within six months on their own initiative? A strong product earns its way back.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Trust</div>
+      <div class="name">"Helpful Now" NPS by Tenure</div>
+      <div class="desc">Tracked monthly per cohort. Watch for the M9–M12 dip before it shows up in churn data.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: RISKS -->
+  <h2><span class="num">09 — Risks &amp; Guardrails</span>What I'd watch for, and how I'd protect against it</h2>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Clinical</div>
+      <h3>Optimizing for retention at the expense of clinical outcomes</h3>
+    </div>
+    <p>If retention bets nudge users toward continued use without clinical benefit, we've built a habit, not a health product. Every retention experiment runs paired with a clinical-outcome check, and clinical metrics have veto power on launch.</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Equity</div>
+      <h3>Personalization that widens disparities</h3>
+    </div>
+    <p>Segment-aware features can deliver less to under-represented users if training data is skewed. Discovery includes intentional over-recruiting from under-served populations; segmentation models are audited for performance parity before any user-facing rollout.</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Privacy</div>
+      <h3>Health data feeding the wrong loops</h3>
+    </div>
+    <p>Glucose data is sensitive even when de-identified. Care-team sharing, peer benchmarks, and ML training each require their own explicit consent surface, with revocation that actually deletes downstream artifacts.</p>
+  </div>
+
+  <div class="risk">
+    <div>
+      <div class="risk-label">Risk · Discovery</div>
+      <h3>Confirmation bias in the synthesis</h3>
+    </div>
+    <p>Six hypotheses, run by people with priors, will tend to find what they expect. Synthesis uses a structured framework where each hypothesis must be weighted with both confirming and disconfirming evidence before any roadmap call is made.</p>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="close-card">
+    <div class="kicker">Why I'm Drawn to This Problem</div>
+    <h2>Discovery in regulated, data-dense products is where I do my best work.</h2>
+    <p>I've spent the past five years as a Principal PM building 0-to-1 AI/ML products in environments where accuracy has real consequences — most recently DocV at Alaska Airlines, an international document verification platform spanning 207 nationalities, where I owned the discovery, segmentation, asymmetric error thresholds, and phased rollout strategy. Before that, healthcare PM work at Aetna gave me direct experience with eligibility workflows, regulated patient data, and the gap between what providers want and what patients actually do.</p>
+    <p>The Stelo retention problem sits squarely in the intersection of AI-driven personalization, behavioral science, and clinical care — three threads I've been pulling on for over a decade. I'd be honored to bring that full toolkit to it.</p>
+
+    <div class="close-grid">
+      <div>
+        <div class="label">Portfolio</div>
+        <div class="value"><a class="inline" href="https://mrsspockdeepa.github.io">mrsspockdeepa.github.io</a></div>
+      </div>
+      <div>
+        <div class="label">Background</div>
+        <div class="value">Alaska Airlines · Boeing/Jeppesen · Aetna · Slalom</div>
+      </div>
+      <div>
+        <div class="label">Currently Studying</div>
+        <div class="value">AI for Product Management — evals, guardrails, and pricing AI products (Maven cohort)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>© Jen Deepa · Discovery Case Study</span>
+    <span>Speculative — not affiliated with Dexcom</span>
+  </div>
+
+</div>
+</body>
+</html>
