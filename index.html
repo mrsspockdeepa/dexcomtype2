@@ -578,32 +578,8 @@
     </div>
   </div>
 
-  <!-- SECTION 1: THE ROLE -->
-  <h2><span class="num">01. The Role</span>Problem discovery for the full Type 2 Patient Experience portfolio</h2>
-
-  <p>The role spans Dexcom's complete Type 2 patient experience: Stelo's OTC, cash-pay non-insulin segment; G7 Type 2 prescription users (insulin and non-insulin); and future Type 2 products. The mandate is to <strong>identify the highest-impact customer and business problems before solution investment is made</strong>, frame them in terms of impact rather than features, and produce decision-ready evidence that informs vertical product, platform, data, and UX teams.</p>
-
-  <p>This is a problem-discovery role, not a build role. Solution discovery and delivery remain with the vertical teams. My job is to clarify the why, define success, and supply the evidence those teams need to make good roadmap calls.</p>
-
-  <p>This case study uses one flagship problem, the long-term retention cliff in non-insulin Type 2 CGM use, as a worked example of how I'd run discovery in the first six months. The methodology generalizes; the M12 hypothesis is the test case.</p>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="figure">25M+</div>
-      <div class="desc">U.S. adults with Type 2 diabetes not on insulin. The OTC non-insulin segment Stelo addresses.</div>
-    </div>
-    <div class="stat">
-      <div class="figure">$89/mo</div>
-      <div class="desc">Stelo cash-pay subscription. LTV is entirely a function of months retained, making retention the highest-impact business problem.</div>
-    </div>
-    <div class="stat">
-      <div class="figure">~M12</div>
-      <div class="desc">The retention cliff <em>in CGM behavior-change literature.</em> Stelo's actual cohort curve is a working hypothesis I'd verify on day one (Section 03).</div>
-    </div>
-  </div>
-
   <!-- SECTION 2: STRATEGIC CONTEXT -->
-  <h2><span class="num">02. Strategic Context</span>Four forces shaping what Stelo retention work can be, and what it can't</h2>
+  <h2><span class="num">01. Strategic Context</span>Four forces shaping what Stelo retention work can be, and what it can't</h2>
 
   <p>Before any discovery program, I'd want to be explicit about the strategic ground we're standing on. Stelo's retention problem isn't a generic SaaS retention problem. It's shaped by four forces a Principal PM has to internalize before designing the work.</p>
 
@@ -647,12 +623,13 @@
   </div>
 
   <!-- SECTION 3: WHAT I'D VERIFY FIRST -->
-  <h2><span class="num">03. What I'd Verify First</span>The M12 cliff is my working hypothesis. Here's how I'd test it on day one</h2>
+  <h2><span class="num">02. What I'd Verify First</span>The M12 cliff is my working hypothesis. Here's how I'd test it on day one</h2>
 
   <p>I want to be honest about what I know and what I'm assuming. The "M12 cliff" framing in this case study comes from CGM behavior-change literature on adherence patterns, not from published Stelo cohort data. Stelo has only been live since mid-2024, so the M12 picture is still forming. The first week of this role isn't running new discovery. It's understanding what Dexcom already knows.</p>
 
   <h4>What Dexcom likely already has</h4>
-  <p>Dexcom has 25+ years of CGM adherence research across G6, G7, and now Stelo. Internal UX research, clinical literature, claims data analyses, and market research likely already address many of the questions this case study raises. Doing new discovery without first inventorying that body of knowledge would be wasteful and arrogant. The right move is to figure out what's already known, what translates from prescription CGM to OTC Stelo, and what genuinely is a Stelo-specific gap that warrants new research.</p>
+  <p>Dexcom's institutional knowledge of CGM behavior runs decades deep, and the vast majority of it is on Type 1. G6 and G7 adherence in long-tenure Type 1 users, low-vision and pediatric accommodations, alert fatigue patterns, family-of-user dynamics, identity work around device wear, and clinical outcome correlation with engagement are all questions Type 1 research has been answering for 25+ years. Stelo is new; Type 2 non-insulin patient experience has its own dynamics; but pretending the Type 1 body of knowledge doesn't exist would leave the most studied CGM patient population on the table.</p>
+  <p>The right first move is to inventory all of it: what's established in Type 1 and translates directly, what translates with adaptation, what's genuinely Type 2-distinctive, and where the real Stelo-specific gaps are that warrant new research.</p>
 
   <h4>The day-one data questions</h4>
   <p>Before the first new interview, here's what I'd want answered from internal data and existing research:</p>
@@ -678,7 +655,18 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">Q3 · Stelo ↔ G7 Transitions</div>
+    <div class="req-id">Q3 · Type 1 ↔ Type 2 Transfer</div>
+    <h3>Which Type 1 patient-experience patterns translate, with adaptation, or not at all?</h3>
+    <ul>
+      <li>Long-tenure adherence behaviors, alert fatigue, novelty decay, and identity work around device visibility have been studied extensively in Type 1. Most likely transfer with framing changes.</li>
+      <li>Diabetes-related vision loss, dexterity decline, and older-user accommodations are mature Type 1 design problems and arguably more relevant to long-tenure Type 2 than to Type 1.</li>
+      <li>Genuinely Type 2-distinctive: behavioral disease framing, GLP-1 co-management, OTC cash-pay psychology, and the "I'm not really sick" identity. These need new research.</li>
+      <li>Output: a transfer matrix that tells the team where to lean on existing evidence and where to invest in new discovery.</li>
+    </ul>
+  </div>
+
+  <div class="req-block">
+    <div class="req-id">Q4 · Stelo ↔ G7 Transitions</div>
     <h3>Is some "churn" actually graduation to prescription?</h3>
     <ul>
       <li>What percentage of Stelo "churners" later show up as G7 users?</li>
@@ -688,7 +676,7 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">Q4 · GLP-1 Overlap</div>
+    <div class="req-id">Q5 · GLP-1 Overlap</div>
     <h3>How does the GLP-1 user behave differently?</h3>
     <ul>
       <li>What percentage of the Stelo base is on a GLP-1, and how is that growing?</li>
@@ -698,7 +686,7 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">Q5 · Channel Mix</div>
+    <div class="req-id">Q6 · Channel Mix</div>
     <h3>Does retention vary by acquisition channel?</h3>
     <ul>
       <li>Direct.com vs retail pharmacy vs employer wellness. What's the channel mix and how does it segment retention?</li>
@@ -708,7 +696,7 @@
   </div>
 
   <div class="req-block">
-    <div class="req-id">Q6 · Literature Benchmark</div>
+    <div class="req-id">Q7 · Literature Benchmark</div>
     <h3>How does Stelo compare to published non-insulin T2D CGM adherence?</h3>
     <ul>
       <li>ABCD CGM consensus, ADA Standards of Care updates, and recent JDST publications all bear on what "normal" adherence looks like.</li>
@@ -719,7 +707,7 @@
   <p>If the answers confirm the M12 hypothesis, the rest of this case study runs as written. If they don't, if drop-off concentrates at M3, or "churn" is mostly G7 graduation, or GLP-1 explains most of the cliff, the entire approach reshapes. <strong>Discovery's first job is to find out which world we're in.</strong></p>
 
   <!-- SECTION 4: THE FULL ARC / JOURNEY -->
-  <h2><span class="num">04. The Full Arc</span>Studying the Type 2 patient journey end-to-end, from diagnosis through drop-off</h2>
+  <h2><span class="num">03. The Full Arc</span>Studying the Type 2 patient journey end-to-end, from diagnosis through drop-off</h2>
 
   <p>The M12 cliff doesn't exist in isolation. By the time someone reaches month 12 of Stelo, they've often been navigating Type 2 diabetes for five, ten, fifteen years, a diagnosis that has already shaped their relationship with food, their body, their healthcare system, and their identity long before they ever saw a Stelo ad. Any retention work that ignores that upstream context solves the wrong problem.</p>
 
@@ -842,7 +830,7 @@
   <p>Practically, this shapes the discovery work in three ways. Weekly interviews span every phase, including people who never bought Stelo and people newly diagnosed who haven't yet considered a CGM. Problems get tagged with where in the arc they originate, which often points toward upstream interventions: onboarding repair, diagnosis-stage education partnerships, provider co-management, rather than another M12 feature. The journey map itself becomes a living team artifact and the shared language for where we're focused.</p>
 
   <!-- SECTION 5: PROBLEM HYPOTHESES -->
-  <h2><span class="num">05. Working Problem Hypotheses</span>Seven candidate explanations for the cliff, each pointing to a different problem to validate</h2>
+  <h2><span class="num">04. Working Problem Hypotheses</span>Seven candidate explanations for the cliff, each pointing to a different problem to validate</h2>
 
   <p>I'd enter discovery with a hypothesis tree, not a single theory. Each hypothesis frames a different business problem and demands a different evidence package to confirm or rule out. These aren't fixed; they get pruned, replaced, and added to every week as we hear from customers. They're also deliberately Stelo-shaped: the OTC, cash-pay, non-insulin context produces churn dynamics that generic SaaS retention frameworks miss.</p>
 
@@ -899,7 +887,7 @@
   </div>
 
   <!-- SECTION 6: THE 6-MONTH DISCOVERY PLAN -->
-  <h2><span class="num">06. The 6-Month Discovery Plan</span>Month-by-month progression from internal inventory to decision-ready problem maps</h2>
+  <h2><span class="num">05. The 6-Month Discovery Plan</span>Month-by-month progression from internal inventory to decision-ready problem maps</h2>
 
   <p>The biggest mistake to avoid is treating discovery as a project with a start and an end. Drawing on Teresa Torres's continuous discovery framework, the rhythm is built around <strong>at least one customer interview per week, every week, indefinitely</strong>, held by a product trio of PM, designer, and engineer. The first six months layer a progression on top of that rhythm: inventory what's known, validate the hypothesis tree, surface and pressure-test the highest-impact problems, then hand decision-ready evidence to the vertical product, platform, data, and UX teams that will act on it.</p>
 
@@ -1033,7 +1021,7 @@
   <p class="pull">"The point of weekly interviews isn't to gather data faster. It's to make customer evidence ambient, so it's already in the room when product decisions get made."<cite>Adapted from Teresa Torres, Continuous Discovery Habits</cite></p>
 
   <!-- SECTION 7: PROBLEM TREE -->
-  <h2><span class="num">07. Problem Tree &amp; Assumption Tests</span>How weekly interviews translate into decision-ready evidence</h2>
+  <h2><span class="num">06. Problem Tree &amp; Assumption Tests</span>How weekly interviews translate into decision-ready evidence</h2>
 
   <p>Continuous discovery without a structure for synthesis becomes a stream of anecdotes. The Problem Tree is how the trio translates what we hear in interviews into prioritized, decision-ready evidence, with an explicit chain from outcome to customer problem to the assumptions we'd need to test to know whether the problem is real, prevalent, and high-impact. The tree is a living document, updated weekly, and is the team's single source of truth for what we know, what we're betting on, and what we're testing next. <strong>Solutions live downstream of this tree, owned by vertical product and platform teams.</strong></p>
 
@@ -1143,7 +1131,7 @@
   <p>Problems are weighed by reach (how many users in which segments), severity (how acute the pain), frequency (how often it surfaces), and business impact (LTV at risk, retention revenue). Assumption tests are prioritized by the riskiness of the assumption: what would we need to believe for this problem to matter, and how cheaply can we falsify it? <strong>Solutions, prioritization of solutions, and roadmap calls all live downstream of this tree, with the vertical product teams that own those surfaces.</strong></p>
 
   <!-- SECTION 8: DISCOVERY DELIVERABLES & INFLUENCE -->
-  <h2><span class="num">08. Discovery Deliverables &amp; Influence</span>What the work produces, and how it flows into other teams' decisions</h2>
+  <h2><span class="num">07. Discovery Deliverables &amp; Influence</span>What the work produces, and how it flows into other teams' decisions</h2>
 
   <p>This role doesn't ship platform features. It produces decision-ready evidence that informs the vertical product, platform, data, UX, and operations teams that build. Below: what's produced, and where each artifact lands.</p>
 
@@ -1162,7 +1150,7 @@
     <div class="req-id">D2 · Living Problem Tree</div>
     <h3>Outcome → problems → assumption tests, always current</h3>
     <ul>
-      <li>The Section 07 artifact, kept live. Source of truth for what we know, what we're betting on, what's being tested next.</li>
+      <li>The Section 06 artifact, kept live. Source of truth for what we know, what we're betting on, what's being tested next.</li>
       <li>Visible to leadership and stakeholders without translation.</li>
     </ul>
   </div>
@@ -1233,7 +1221,7 @@
   </div>
 
   <!-- SECTION 9: SUCCESS CRITERIA -->
-  <h2><span class="num">09. Success Criteria</span>What good looks like for this work, and the outcomes the role is ultimately accountable to</h2>
+  <h2><span class="num">08. Success Criteria</span>What good looks like for this work, and the outcomes the role is ultimately accountable to</h2>
 
   <p>Two layers. <strong>The first</strong>: how the discovery work itself gets judged in the first six months. <strong>The second</strong>: the customer and business outcomes the role is ultimately accountable to, on a longer arc, through the vertical teams that act on the evidence.</p>
 
@@ -1296,7 +1284,7 @@
   </div>
 
   <!-- SECTION 10: RISKS -->
-  <h2><span class="num">10. Risks &amp; Guardrails</span>What I'd watch for, and how I'd protect against it</h2>
+  <h2><span class="num">09. Risks &amp; Guardrails</span>What I'd watch for, and how I'd protect against it</h2>
 
   <div class="risk">
     <div>
